@@ -8,11 +8,13 @@ namespace Bravo.Models {
 
 		[Required, MaxLength(255)]
 		public string AlbumName { get; set; }
-		
+
 		[Required]
 		public int GenreId { get; set; }
-		
-		public virtual Genre Genre { get; set; }
-		public virtual ICollection<Song> Songs { get; set; }
+
+		[Required]
+		public int ArtistId { get; set; }
+
+		public ICollection<Song> Songs { get; set; }
 	}
 }

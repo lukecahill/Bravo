@@ -19,9 +19,9 @@ namespace Bravo.Migrations {
 		private IList<model.Album> GetAlbums {
 			get {
 				return new List<model.Album> {
-					new model.Album { AlbumId = 1, AlbumName = "Indestructible", GenreId = 1 },
-					new model.Album { AlbumId = 2, AlbumName = "My Beautifiul Dark Twisted Fantasy", GenreId = 2 },
-					new model.Album { AlbumId = 3, AlbumName = "Stadium Arcadium", GenreId = 1 }
+					new model.Album { AlbumId = 1, AlbumName = "Indestructible", GenreId = 1, ArtistId = 1 },
+					new model.Album { AlbumId = 2, AlbumName = "My Beautifiul Dark Twisted Fantasy", GenreId = 2, ArtistId = 2 },
+					new model.Album { AlbumId = 3, AlbumName = "Stadium Arcadium", GenreId = 1, ArtistId = 3 }
 				};
 			}
 		}
@@ -29,9 +29,9 @@ namespace Bravo.Migrations {
 		private IList<model.Artist> GetArtists {
 			get {
 				return new List<model.Artist> {
-					new model.Artist { ArtistId = 1, ArtistName = "Disturbed", AlbumId = 1 },
-					new model.Artist { ArtistId = 2, ArtistName = "Kanye West", AlbumId = 2 },
-					new model.Artist { ArtistId = 3, ArtistName = "Red Hot Chili Peppers", AlbumId = 3 }
+					new model.Artist { ArtistId = 1, ArtistName = "Disturbed" },
+					new model.Artist { ArtistId = 2, ArtistName = "Kanye West" },
+					new model.Artist { ArtistId = 3, ArtistName = "Red Hot Chili Peppers" }
 				};
 			}
 		}

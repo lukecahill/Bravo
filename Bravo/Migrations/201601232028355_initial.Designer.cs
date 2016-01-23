@@ -13,7 +13,7 @@ namespace Bravo.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201601232002294_initial"; }
+            get { return "201601232028355_initial"; }
         }
         
         string IMigrationMetadata.Source

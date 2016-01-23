@@ -13,33 +13,14 @@ namespace Bravo.Migrations
                     {
                         AlbumId = c.Int(nullable: false, identity: true),
                         AlbumName = c.String(nullable: false, maxLength: 255),
-                        ArtistId = c.Int(nullable: false),
                         GenreId = c.Int(nullable: false),
+                        ArtistId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.AlbumId)
                 .ForeignKey("dbo.Artists", t => t.ArtistId, cascadeDelete: true)
                 .ForeignKey("dbo.Genres", t => t.GenreId, cascadeDelete: true)
-                .Index(t => t.ArtistId)
-                .Index(t => t.GenreId);
-            
-            CreateTable(
-                "dbo.Artists",
-                c => new
-                    {
-                        ArtistId = c.Int(nullable: false, identity: true),
-                        ArtistName = c.String(nullable: false, maxLength: 255),
-                        AlbumId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.ArtistId);
-            
-            CreateTable(
-                "dbo.Genres",
-                c => new
-                    {
-                        GenreId = c.Int(nullable: false, identity: true),
-                        GenreName = c.String(nullable: false, maxLength: 255),
-                    })
-                .PrimaryKey(t => t.GenreId);
+                .Index(t => t.GenreId)
+                .Index(t => t.ArtistId);
             
             CreateTable(
                 "dbo.Songs",
@@ -53,19 +34,37 @@ namespace Bravo.Migrations
                 .ForeignKey("dbo.Albums", t => t.AlbumId, cascadeDelete: true)
                 .Index(t => t.AlbumId);
             
+            CreateTable(
+                "dbo.Artists",
+                c => new
+                    {
+                        ArtistId = c.Int(nullable: false, identity: true),
+                        ArtistName = c.String(nullable: false, maxLength: 255),
+                    })
+                .PrimaryKey(t => t.ArtistId);
+            
+            CreateTable(
+                "dbo.Genres",
+                c => new
+                    {
+                        GenreId = c.Int(nullable: false, identity: true),
+                        GenreName = c.String(nullable: false, maxLength: 255),
+                    })
+                .PrimaryKey(t => t.GenreId);
+            
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Songs", "AlbumId", "dbo.Albums");
             DropForeignKey("dbo.Albums", "GenreId", "dbo.Genres");
             DropForeignKey("dbo.Albums", "ArtistId", "dbo.Artists");
+            DropForeignKey("dbo.Songs", "AlbumId", "dbo.Albums");
             DropIndex("dbo.Songs", new[] { "AlbumId" });
-            DropIndex("dbo.Albums", new[] { "GenreId" });
             DropIndex("dbo.Albums", new[] { "ArtistId" });
-            DropTable("dbo.Songs");
+            DropIndex("dbo.Albums", new[] { "GenreId" });
             DropTable("dbo.Genres");
             DropTable("dbo.Artists");
+            DropTable("dbo.Songs");
             DropTable("dbo.Albums");
         }
     }

@@ -11,7 +11,7 @@ namespace Bravo.Controllers {
 
 		// GET: Albums
 		public ActionResult Index() {
-			var albums = db.Albums.Include(a => a.Genre);
+			var albums = db.Albums.Include(a => a.Songs);
 			return View(albums.ToList());
 		}
 

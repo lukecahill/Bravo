@@ -9,6 +9,6 @@ namespace Bravo.Models {
 		[Required, MaxLength(255)]
 		public string GenreName { get; set; }
 
-		public virtual ICollection<Album> Album { get; set; }
+		public virtual ICollection<Album> Albums { get; set; }
 	}
 }
