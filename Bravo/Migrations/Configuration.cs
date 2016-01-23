@@ -9,7 +9,7 @@ namespace Bravo.Migrations {
 			AutomaticMigrationsEnabled = false;
 		}
 
-		protected override void Seed(Bravo.DAL.BravoContext context) {
+		protected override void Seed(DAL.BravoContext context) {
 			context.Albums.AddOrUpdate(GetAlbums.ToArray());
 			context.Artists.AddOrUpdate(GetArtists.ToArray());
 			context.Genres.AddOrUpdate(GetGenres.ToArray());
@@ -20,7 +20,7 @@ namespace Bravo.Migrations {
 			get {
 				return new List<model.Album> {
 					new model.Album { AlbumId = 1, AlbumName = "Indestructible", GenreId = 1, ArtistId = 1 },
-					new model.Album { AlbumId = 2, AlbumName = "My Beautifiul Dark Twisted Fantasy", GenreId = 2, ArtistId = 2 },
+					new model.Album { AlbumId = 2, AlbumName = "My Beautiful Dark Twisted Fantasy", GenreId = 2, ArtistId = 2 },
 					new model.Album { AlbumId = 3, AlbumName = "Stadium Arcadium", GenreId = 1, ArtistId = 3 }
 				};
 			}
@@ -49,7 +49,7 @@ namespace Bravo.Migrations {
 			get {
 				return new List<model.Song> {
 					new model.Song { SongId = 1, SongName = "Indestructible", AlbumId = 1 },
-					new model.Song { SongId = 2, SongName = "Deveil in a New Dress", AlbumId = 2 },
+					new model.Song { SongId = 2, SongName = "Devil in a New Dress", AlbumId = 2 },
 					new model.Song { SongId = 3, SongName = "Otherside", AlbumId = 3 }
 			};
 			}

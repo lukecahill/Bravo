@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Bravo.Models.Song>
+﻿@model IEnumerable<Bravo.ViewModels.SongViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -12,7 +12,7 @@
 <table class="table table-striped">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Album.AlbumName)
+            @Html.DisplayNameFor(model => model.AlbumName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.SongName)
@@ -23,7 +23,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Album.AlbumName)
+            @Html.DisplayFor(modelItem => item.AlbumName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.SongName)

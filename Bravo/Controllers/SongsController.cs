@@ -3,16 +3,27 @@ using Bravo.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using Bravo.BusinessLogic.Repositories;
 using System.Web.Mvc;
 
 namespace Bravo.Controllers {
 	public class SongsController : Controller {
+
 		private BravoContext db = new BravoContext();
+		// TODO: Change this later
+		private SongRepository _rep = new SongRepository();
+
+		public SongsController() { }
+
+		// For DI
+		public SongsController(SongRepository song) {
+			_rep = song;
+		}
 
 		// GET: Songs
 		public ActionResult Index() {
-			var songs = db.Songs.Include(s => s.Album);
-			return View(songs.ToList());
+			var songs = _rep.GetAll();
+			return View(songs.ToArray());
 		}
 
 		// GET: Songs/Details/5
