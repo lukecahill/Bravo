@@ -19,9 +19,9 @@ namespace Bravo.Migrations {
 		private IList<model.Album> GetAlbums {
 			get {
 				return new List<model.Album> {
-					new model.Album { AlbumId = 1, AlbumName = "Indestructible", ArtistId = 1, GenreId = 1 },
-					new model.Album { AlbumId = 2, AlbumName = "My Beautifiul Dark Twisted Fantasy", ArtistId = 2, GenreId = 2 },
-					new model.Album { AlbumId = 3, AlbumName = "Stadium Arcadium", ArtistId = 3, GenreId = 1 }
+					new model.Album { AlbumId = 1, AlbumName = "Indestructible", GenreId = 1 },
+					new model.Album { AlbumId = 2, AlbumName = "My Beautifiul Dark Twisted Fantasy", GenreId = 2 },
+					new model.Album { AlbumId = 3, AlbumName = "Stadium Arcadium", GenreId = 1 }
 				};
 			}
 		}
