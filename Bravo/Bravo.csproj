@@ -167,6 +167,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="BusinessLogic\Repositories\AlbumRepository.cs" />
     <Compile Include="BusinessLogic\Repositories\ArtistRepository.cs" />
     <Compile Include="BusinessLogic\Repositories\SongRepository.cs" />
     <Compile Include="Controllers\AlbumsController.cs" />
