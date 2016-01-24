@@ -48,6 +48,10 @@ namespace Bravo.BusinessLogic.Repositories {
 			db.SaveChanges();
 		}
 
+		public bool CheckExists(int id) {
+			return db.Albums.Any(e => e.AlbumId == id);
+		}
+
 		public void Dispose() {
 			db.Dispose();
 		}
