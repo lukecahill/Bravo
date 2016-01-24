@@ -1,9 +1,9 @@
 ﻿using Bravo.DAL;
 using Bravo.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System;
 
 namespace Bravo.BusinessLogic.Repositories {
 	public class SongRepository : IDisposable {
