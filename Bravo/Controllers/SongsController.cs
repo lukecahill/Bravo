@@ -9,10 +9,11 @@ using System.Web.Mvc;
 namespace Bravo.Controllers {
 	public class SongsController : Controller {
 
-		private BravoContext db = new BravoContext();
 		// TODO: Change this later
+		private BravoContext db = new BravoContext();
 		private SongRepository _rep = new SongRepository();
 
+		// For non-DI
 		public SongsController() { }
 
 		// For DI
@@ -27,11 +28,11 @@ namespace Bravo.Controllers {
 		}
 
 		// GET: Songs/Details/5
-		public ActionResult Details(int? id) {
-			if (id == null) {
-				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-			}
-			Song song = db.Songs.Find(id);
+		public ActionResult Details(int id) {
+			//if (id == null) {
+			//	return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			//}
+			var song = _rep.GetById(id);
 			if (song == null) {
 				return HttpNotFound();
 			}
@@ -51,8 +52,7 @@ namespace Bravo.Controllers {
 		[ValidateAntiForgeryToken]
 		public ActionResult Create([Bind(Include = "SongId,SongName,AlbumId")] Song song) {
 			if (ModelState.IsValid) {
-				db.Songs.Add(song);
-				db.SaveChanges();
+				_rep.Create(song);
 				return RedirectToAction("Index");
 			}
 
@@ -89,12 +89,13 @@ namespace Bravo.Controllers {
 		}
 
 		// GET: Songs/Delete/5
-		public ActionResult Delete(int? id) {
-			if (id == null) {
-				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-			}
-			Song song = db.Songs.Find(id);
-			if (song == null) {
+		public ActionResult Delete(int id) {
+			//if (id == null) {
+			//	return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			//}
+
+			var song = _rep.CheckExists(id);
+			if (!song) {
 				return HttpNotFound();
 			}
 			return View(song);
@@ -104,9 +105,7 @@ namespace Bravo.Controllers {
 		[HttpPost, ActionName("Delete")]
 		[ValidateAntiForgeryToken]
 		public ActionResult DeleteConfirmed(int id) {
-			Song song = db.Songs.Find(id);
-			db.Songs.Remove(song);
-			db.SaveChanges();
+			_rep.Delete(id);
 			return RedirectToAction("Index");
 		}
 
