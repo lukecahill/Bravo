@@ -9,5 +9,7 @@
 			this.AlbumName = album.AlbumName;
 			this.GenreId = album.GenreId;
 		}
+
+		public AlbumViewModel() { }
 	}
 }
