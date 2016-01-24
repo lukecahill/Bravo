@@ -5,7 +5,7 @@ namespace Bravo.Models {
 		[Required]
 		public int SongId { get; set; }
 
-		[Required, MaxLength(255)]
+		[Required, MaxLength(255), Display(Name = "Song Title")]
 		public string SongName { get; set; }
 
 		[Required]

@@ -6,7 +6,7 @@ namespace Bravo.Models {
 		[Required]
 		public int AlbumId { get; set; }
 
-		[Required, MaxLength(255)]
+		[Required, MaxLength(255), Display(Name = "Title")]
 		public string AlbumName { get; set; }
 
 		[Required]
