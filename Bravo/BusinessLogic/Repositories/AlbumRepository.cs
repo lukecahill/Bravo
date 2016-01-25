@@ -10,14 +10,16 @@ namespace Bravo.BusinessLogic.Repositories {
 
 		private readonly BravoContext db = new BravoContext();
 
-		public IEnumerable<AlbumViewModel>GetAll() {
+		public IEnumerable<AlbumViewModelSummary>GetAll() {
 			var entity = db.Albums.ToList();
 
-			return entity.Select(e => new AlbumViewModel(e)).ToList();
+			return entity.Select(e => new AlbumViewModelSummary(e)).ToList();
 		}
 
 		public AlbumViewModel GetById(int id) {
-			var entity = db.Albums.FirstOrDefault(e => e.AlbumId == id);
+			var entity = db.Albums
+				.Include(a => a.Songs)
+				.FirstOrDefault(e => e.AlbumId == id);
 
 			return new AlbumViewModel(entity);
 		}

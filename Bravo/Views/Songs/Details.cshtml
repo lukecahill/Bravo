@@ -7,7 +7,9 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Song</h4>
+	<h4>
+		@Html.DisplayFor(model => model.SongName)
+	</h4>
     <hr />
 	<dl class="dl-horizontal">
 		<dt>
@@ -24,6 +26,14 @@
 
 		<dd>
 			@Html.DisplayFor(model => model.SongName)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.AlbumId)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.AlbumId)
 		</dd>
 
 	</dl>

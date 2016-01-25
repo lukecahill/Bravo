@@ -1,6 +1,5 @@
 ﻿using Bravo.DAL;
 using Bravo.Models;
-using System.Linq;
 using Bravo.BusinessLogic.Repositories;
 using System.Web.Mvc;
 
@@ -18,8 +17,7 @@ namespace Bravo.Controllers {
 
 		// GET: Songs
 		public ActionResult Index() {
-			var songs = _rep.GetAll();
-			return View(songs.ToArray());
+			return View(_rep.GetAll());
 		}
 
 		// GET: Songs/Details/5

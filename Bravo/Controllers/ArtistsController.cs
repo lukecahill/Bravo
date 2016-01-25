@@ -2,24 +2,25 @@
 using Bravo.Models;
 using System.Data.Entity;
 using System.Linq;
+using Bravo.BusinessLogic.Repositories;
 using System.Net;
 using System.Web.Mvc;
 
 namespace Bravo.Controllers {
 	public class ArtistsController : Controller {
-		private BravoContext db = new BravoContext();
+
+		private BravoContext _db = new BravoContext();
+		private ArtistRepository _rep = new ArtistRepository();
 
 		// GET: Artists
 		public ActionResult Index() {
-			return View(db.Artists.ToList());
+			return View(_rep.GetAll());
 		}
 
 		// GET: Artists/Details/5
-		public ActionResult Details(int? id) {
-			if (id == null) {
-				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-			}
-			Artist artist = db.Artists.Find(id);
+		public ActionResult Details(int id) {
+			var artist = _rep.GetById(id);
+
 			if (artist == null) {
 				return HttpNotFound();
 			}
@@ -38,8 +39,7 @@ namespace Bravo.Controllers {
 		[ValidateAntiForgeryToken]
 		public ActionResult Create([Bind(Include = "ArtistId,ArtistName,AlbumId")] Artist artist) {
 			if (ModelState.IsValid) {
-				db.Artists.Add(artist);
-				db.SaveChanges();
+				_rep.Create(artist);
 				return RedirectToAction("Index");
 			}
 
@@ -47,11 +47,9 @@ namespace Bravo.Controllers {
 		}
 
 		// GET: Artists/Edit/5
-		public ActionResult Edit(int? id) {
-			if (id == null) {
-				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-			}
-			Artist artist = db.Artists.Find(id);
+		public ActionResult Edit(int id) {
+
+			var artist = _rep.GetById(id);
 			if (artist == null) {
 				return HttpNotFound();
 			}
@@ -65,20 +63,17 @@ namespace Bravo.Controllers {
 		[ValidateAntiForgeryToken]
 		public ActionResult Edit([Bind(Include = "ArtistId,ArtistName,AlbumId")] Artist artist) {
 			if (ModelState.IsValid) {
-				db.Entry(artist).State = EntityState.Modified;
-				db.SaveChanges();
+				_rep.Update(artist);
 				return RedirectToAction("Index");
 			}
 			return View(artist);
 		}
 
 		// GET: Artists/Delete/5
-		public ActionResult Delete(int? id) {
-			if (id == null) {
-				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-			}
-			Artist artist = db.Artists.Find(id);
-			if (artist == null) {
+		public ActionResult Delete(int id) {
+			var artist = _rep.CheckExists(id);
+
+			if (!artist) {
 				return HttpNotFound();
 			}
 			return View(artist);
@@ -88,15 +83,14 @@ namespace Bravo.Controllers {
 		[HttpPost, ActionName("Delete")]
 		[ValidateAntiForgeryToken]
 		public ActionResult DeleteConfirmed(int id) {
-			Artist artist = db.Artists.Find(id);
-			db.Artists.Remove(artist);
-			db.SaveChanges();
+			_rep.Delete(id);
+			_db.SaveChanges();
 			return RedirectToAction("Index");
 		}
 
 		protected override void Dispose(bool disposing) {
 			if (disposing) {
-				db.Dispose();
+				_db.Dispose();
 			}
 			base.Dispose(disposing);
 		}
