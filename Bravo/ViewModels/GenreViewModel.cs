@@ -7,5 +7,7 @@
 			this.LabelId = genre.GenreId;
 			this.LabelName = genre.GenreName;
 		}
+
+		public GenreViewModel() { }
 	}
 }

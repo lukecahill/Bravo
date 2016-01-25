@@ -28,5 +28,7 @@ namespace Bravo.ViewModels {
 				this.AlbumsList = list;
 			}
 		}
+
+		public ArtistViewModel() { }
 	}
 }

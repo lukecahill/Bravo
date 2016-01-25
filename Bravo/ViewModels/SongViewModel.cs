@@ -12,5 +12,7 @@
 			this.SongName = song.SongName;
 			this.AlbumId = song.AlbumId;
 		}
+
+		public SongViewModel() { }
 	}
 }
