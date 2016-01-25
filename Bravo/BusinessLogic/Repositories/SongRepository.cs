@@ -40,6 +40,7 @@ namespace Bravo.BusinessLogic.Repositories {
 
 			entity.SongName = song.SongName;
 			entity.SongId = song.SongId;
+			entity.AlbumId = song.AlbumId;
 
 			db.Entry(entity).State = EntityState.Modified;
 			db.SaveChanges();
