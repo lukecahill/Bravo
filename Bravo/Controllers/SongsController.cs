@@ -70,10 +70,12 @@ namespace Bravo.Controllers {
 		// GET: Songs/Delete/5
 		public ActionResult Delete(int id) {
 
-			var song = _rep.CheckExists(id);
-			if (!song) {
+			var check = _rep.CheckExists(id);
+			if (!check) {
 				return HttpNotFound();
 			}
+
+			var song = _rep.GetById(id);
 			return View(song);
 		}
 

@@ -22,3 +22,15 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.btn.btn-primary a {
+    color: white;
+}
+
+.btn.btn-primary a:hover {
+    text-decoration: none;
+}
+
+.top-buffer {
+    margin-top: 2%;
+}

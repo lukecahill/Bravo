@@ -1,10 +1,10 @@
 ﻿@model Bravo.ViewModels.SongViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Details for " + @Model.SongName;
 }
 
-<h2>Details</h2>
+<h2>Details for @Model.SongName</h2>
 
 <div>
 	<h4>
@@ -13,7 +13,7 @@
     <hr />
 	<dl class="dl-horizontal">
 		<dt>
-			@Html.DisplayNameFor(model => model.AlbumName)
+			Album Title
 		</dt>
 
 		<dd>
@@ -21,19 +21,11 @@
 		</dd>
 
 		<dt>
-			@Html.DisplayNameFor(model => model.SongName)
+			Song Title
 		</dt>
 
 		<dd>
 			@Html.DisplayFor(model => model.SongName)
-		</dd>
-
-		<dt>
-			@Html.DisplayNameFor(model => model.AlbumId)
-		</dt>
-
-		<dd>
-			@Html.DisplayFor(model => model.AlbumId)
 		</dd>
 
 	</dl>

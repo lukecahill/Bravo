@@ -7,7 +7,7 @@ namespace Bravo.ViewModels {
 		public int GenreId { get; set; }
 		public int SongCount { get; set; }
 
-		public virtual ICollection<SongViewModel> Songs { get; set; }
+		public virtual ICollection<SongViewModel> SongList { get; set; }
 
 		public AlbumViewModel(Models.Album album) {
 			this.AlbumId = album.AlbumId;
