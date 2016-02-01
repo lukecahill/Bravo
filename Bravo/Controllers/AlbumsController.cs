@@ -1,26 +1,21 @@
 ﻿using Bravo.DAL;
 using Bravo.Models;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
+using Bravo.BusinessLogic.Repositories;
 using System.Web.Mvc;
 
 namespace Bravo.Controllers {
 	public class AlbumsController : Controller {
 		private BravoContext db = new BravoContext();
+		private AlbumRepository _rep = new AlbumRepository();
 
 		// GET: Albums
 		public ActionResult Index() {
-			var albums = db.Albums.Include(a => a.Songs);
-			return View(albums.ToList());
+			return View(_rep.GetAll());
 		}
 
 		// GET: Albums/Details/5
-		public ActionResult Details(int? id) {
-			if (id == null) {
-				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-			}
-			Album album = db.Albums.Find(id);
+		public ActionResult Details(int id) {
+			var album = _rep.GetById(id);
 			if (album == null) {
 				return HttpNotFound();
 			}
@@ -34,14 +29,13 @@ namespace Bravo.Controllers {
 		}
 
 		// POST: Albums/Create
-		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+		// To protect from overposting attacks, please enable the specific properties you want to bind to, for
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public ActionResult Create([Bind(Include = "AlbumId,AlbumName,GenreId")] Album album) {
 			if (ModelState.IsValid) {
-				db.Albums.Add(album);
-				db.SaveChanges();
+				_rep.Create(album);
 				return RedirectToAction("Index");
 			}
 
@@ -50,15 +44,14 @@ namespace Bravo.Controllers {
 		}
 
 		// GET: Albums/Edit/5
-		public ActionResult Edit(int? id) {
-			if (id == null) {
-				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-			}
-			Album album = db.Albums.Find(id);
-			if (album == null) {
+		public ActionResult Edit(int id) {
+			var check = _rep.CheckExists(id);
+			if (!check) {
 				return HttpNotFound();
 			}
-			ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "GenreName", album.GenreId);
+
+			var album = _rep.GetById(id);
+			ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "GenreName", album.AlbumId);
 			return View(album);
 		}
 
@@ -69,8 +62,7 @@ namespace Bravo.Controllers {
 		[ValidateAntiForgeryToken]
 		public ActionResult Edit([Bind(Include = "AlbumId,AlbumName,GenreId")] Album album) {
 			if (ModelState.IsValid) {
-				db.Entry(album).State = EntityState.Modified;
-				db.SaveChanges();
+				_rep.Update(album);
 				return RedirectToAction("Index");
 			}
 			ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "GenreName", album.GenreId);
@@ -78,12 +70,9 @@ namespace Bravo.Controllers {
 		}
 
 		// GET: Albums/Delete/5
-		public ActionResult Delete(int? id) {
-			if (id == null) {
-				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-			}
-			Album album = db.Albums.Find(id);
-			if (album == null) {
+		public ActionResult Delete(int id) {
+			var album = _rep.CheckExists(id);
+			if (!album) {
 				return HttpNotFound();
 			}
 			return View(album);
@@ -93,9 +82,7 @@ namespace Bravo.Controllers {
 		[HttpPost, ActionName("Delete")]
 		[ValidateAntiForgeryToken]
 		public ActionResult DeleteConfirmed(int id) {
-			Album album = db.Albums.Find(id);
-			db.Albums.Remove(album);
-			db.SaveChanges();
+			_rep.Delete(id);
 			return RedirectToAction("Index");
 		}
 

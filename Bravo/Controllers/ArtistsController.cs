@@ -1,9 +1,6 @@
 ﻿using Bravo.DAL;
 using Bravo.Models;
-using System.Data.Entity;
-using System.Linq;
 using Bravo.BusinessLogic.Repositories;
-using System.Net;
 using System.Web.Mvc;
 
 namespace Bravo.Controllers {

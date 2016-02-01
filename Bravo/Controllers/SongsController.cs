@@ -1,18 +1,14 @@
-﻿using Bravo.DAL;
-using Bravo.Models;
+﻿using Bravo.Models;
 using Bravo.BusinessLogic.Repositories;
 using System.Web.Mvc;
 
 namespace Bravo.Controllers {
 	public class SongsController : Controller {
 
-		// TODO: Change this later
-		private BravoContext _db = null;
 		private SongRepository _rep = null;
 
 		public SongsController() {
 			_rep = new SongRepository();
-			_db = new BravoContext();
 		}
 
 		// GET: Songs
@@ -31,7 +27,7 @@ namespace Bravo.Controllers {
 
 		// GET: Songs/Create
 		public ActionResult Create() {
-			ViewBag.AlbumId = new SelectList(_db.Albums, "AlbumId", "AlbumName");
+			ViewBag.AlbumId = _rep.AlbumsSelectList(null);
 			return View();
 		}
 
@@ -43,7 +39,7 @@ namespace Bravo.Controllers {
 				return RedirectToAction("Index");
 			}
 
-			ViewBag.AlbumId = new SelectList(_db.Albums, "AlbumId", "AlbumName", song.AlbumId);
+			ViewBag.AlbumId = _rep.AlbumsSelectList(song.SongId);
 			return View(song);
 		}
 
@@ -56,7 +52,7 @@ namespace Bravo.Controllers {
 
 			var song = _rep.GetById(id);
 
-			ViewBag.AlbumId = new SelectList(_db.Albums, "AlbumId", "AlbumName", song.AlbumId);
+			ViewBag.AlbumId = _rep.AlbumsSelectList(song.AlbumId);
 			return View(song);
 		}
 
@@ -67,7 +63,7 @@ namespace Bravo.Controllers {
 				_rep.Update(song);
 				return RedirectToAction("Index");
 			}
-			ViewBag.AlbumId = new SelectList(_db.Albums, "AlbumId", "AlbumName", song.AlbumId);
+			ViewBag.AlbumId = _rep.AlbumsSelectList(song.AlbumId);
 			return View(song);
 		}
 
@@ -86,13 +82,6 @@ namespace Bravo.Controllers {
 		public ActionResult DeleteConfirmed(int id) {
 			_rep.Delete(id);
 			return RedirectToAction("Index");
-		}
-
-		protected override void Dispose(bool disposing) {
-			if (disposing) {
-				_db.Dispose();
-			}
-			base.Dispose(disposing);
 		}
 	}
 }

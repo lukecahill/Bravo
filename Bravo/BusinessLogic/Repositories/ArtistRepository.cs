@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Web.Mvc;
 
 namespace Bravo.BusinessLogic.Repositories {
 	public class ArtistRepository : IDisposable {
@@ -50,6 +51,10 @@ namespace Bravo.BusinessLogic.Repositories {
 
 		public bool CheckExists(int id) {
 			return db.Artists.Any(e => e.ArtistId == id);
+		}
+
+		public SelectList AlbumSelectList(int? id) {
+			return new SelectList(db.Albums, "AlbumId", "AlbumName", id);
 		}
 
 		public void Dispose() {
