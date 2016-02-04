@@ -167,6 +167,10 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="BindingModels\AlbumBindingModel.cs" />
+    <Compile Include="BindingModels\ArtistBindingModel.cs" />
+    <Compile Include="BindingModels\GenreBindingModels.cs" />
+    <Compile Include="BindingModels\SongBindingModels.cs" />
     <Compile Include="BusinessLogic\Repositories\AlbumRepository.cs" />
     <Compile Include="BusinessLogic\Repositories\ArtistRepository.cs" />
     <Compile Include="BusinessLogic\Repositories\GenreRepository.cs" />
