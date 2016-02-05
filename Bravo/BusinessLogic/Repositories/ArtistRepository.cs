@@ -1,4 +1,5 @@
-﻿using Bravo.DAL;
+﻿using Bravo.BindingModels;
+using Bravo.DAL;
 using Bravo.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,6 @@ namespace Bravo.BusinessLogic.Repositories {
 
 		public IEnumerable<ArtistViewModelSummary> GetAll() {
 			var entities = db.Artists.ToList();
-
 			return entities.Select(e => new ArtistViewModelSummary(e)).ToList();
 		}
 
@@ -25,14 +25,18 @@ namespace Bravo.BusinessLogic.Repositories {
 			return new ArtistViewModel(entity);
 		}
 
-		public ArtistViewModel Create(Models.Artist artist) {
-			db.Artists.Add(artist);
+		public ArtistViewModel Create(CreateArtistBindingModel artist) {
+			var model = new Models.Artist {
+				ArtistName = artist.ArtistName
+			};
+			
+			db.Artists.Add(model);
 			db.SaveChanges();
 
-			return new ArtistViewModel(artist);
+			return new ArtistViewModel(model);
 		}
 
-		public void Update(Models.Artist artist) {
+		public void Update(UpdateArtistBindingModel artist) {
 			var entity = db.Artists.FirstOrDefault(e => e.ArtistId == artist.ArtistId);
 
 			entity.ArtistId = artist.ArtistId;
