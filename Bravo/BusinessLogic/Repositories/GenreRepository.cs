@@ -1,4 +1,5 @@
-﻿using Bravo.DAL;
+﻿using Bravo.BindingModels;
+using Bravo.DAL;
 using Bravo.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -24,14 +25,18 @@ namespace Bravo.BusinessLogic.Repositories {
 			return new GenreViewModel(entity);
 		}
 
-		public GenreViewModel Create(Models.Genre genre) {
-			db.Genres.Add(genre);
+		public GenreViewModel Create(CreateGenreBindingModel genre) {
+			var model = new Models.Genre {
+				GenreName = genre.GenreName
+			};
+
+			db.Genres.Add(model);
 			db.SaveChanges();
 
-			return new GenreViewModel(genre);
+			return new GenreViewModel(model);
 		}
 
-		public void Update(Models.Genre genre) {
+		public void Update(UpdateGenreBindingModel genre) {
 			var entity = db.Genres.FirstOrDefault(e => e.GenreId == genre.GenreId);
 
 			entity.GenreId = genre.GenreId;
