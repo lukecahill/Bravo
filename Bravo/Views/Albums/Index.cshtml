@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Bravo.Models.Album>
+﻿@model IEnumerable<Bravo.ViewModels.AlbumViewModelSummary>
 
 @{
     ViewBag.Title = "Index";
@@ -12,9 +12,6 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Genre.GenreName)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.AlbumName)
         </th>
         <th></th>
@@ -22,9 +19,6 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Genre.GenreName)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.AlbumName)
         </td>

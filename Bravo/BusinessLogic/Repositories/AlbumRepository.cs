@@ -1,4 +1,5 @@
-﻿using Bravo.DAL;
+﻿using Bravo.BindingModels;
+using Bravo.DAL;
 using Bravo.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -25,17 +26,22 @@ namespace Bravo.BusinessLogic.Repositories {
 			return new AlbumViewModel(entity);
 		}
 
-		public AlbumViewModel Create(Models.Album album) {
-			db.Albums.Add(album);
+		public AlbumViewModel Create(CreateAlbumBindingModel album) {
+			var model = new Models.Album {
+				AlbumName = album.AlbumName,
+				GenreId = album.GenreId,
+				ArtistId = album.ArtistId
+			};
+
+			db.Albums.Add(model);
 			db.SaveChanges();
 
-			return new AlbumViewModel(album);
+			return new AlbumViewModel(model);
 		}
 
-		public void Update(Models.Album album) {
+		public void Update(UpdateAlbumBindingModel album) {
 			var entity = db.Albums.FirstOrDefault(e => e.AlbumId == album.AlbumId);
-
-			entity.AlbumId = album.AlbumId;
+			
 			entity.AlbumName = album.AlbumName;
 			entity.ArtistId = album.ArtistId;
 			entity.GenreId = album.GenreId;
@@ -55,8 +61,12 @@ namespace Bravo.BusinessLogic.Repositories {
 			return db.Albums.Any(e => e.AlbumId == id);
 		}
 
-		public SelectList AlbumSelectList(int? id) {
-			return new SelectList(db.Albums, "ArtistId", "ArtistName", id);
+		public SelectList ArtistSelectList(int? id) {
+			return new SelectList(db.Artists, "ArtistId", "ArtistName", id);
+		}
+
+		public SelectList GenreSelectList(int? id) {
+			return new SelectList(db.Genres, "GenreId", "ArtistId", id);
 		}
 
 		public void Dispose() {
