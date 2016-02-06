@@ -1,22 +1,19 @@
 ﻿@model IEnumerable<Bravo.ViewModels.ArtistViewModelSummary>
 
 @{
-    ViewBag.Title = "Artists Summary";
+    ViewBag.Title = "Artists";
 }
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<button class="btn btn-primary pull-right">
+	@Html.ActionLink("Create New", "Create")
+</button>
 <p>
 	There are currently @Model.Count() artist which we have a record of.
 </p>
 <table class="table">
     <tr>
-		<th>
-			@Html.DisplayNameFor(model => model.ArtistId)
-		</th>
         <th>
             @Html.DisplayNameFor(model => model.ArtistName)
         </th>
@@ -25,9 +22,6 @@
 
 @foreach (var item in Model) {
     <tr>
-		<td>
-			@Html.DisplayFor(modelItem => item.ArtistId)
-		</td>
 		<td>
 			@Html.DisplayFor(modelItem => item.ArtistName)
 		</td>

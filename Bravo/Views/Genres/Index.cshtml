@@ -1,18 +1,21 @@
-﻿@model IEnumerable<Bravo.Models.Genre>
+﻿@model IEnumerable<Bravo.ViewModels.GenreViewModelSummary>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Genres";
 }
 
-<h2>Index</h2>
+<h2>Summary of all Genres</h2>
 
+<button class="btn btn-primary pull-right">
+	@Html.ActionLink("Create New", "Create")
+</button>
 <p>
-    @Html.ActionLink("Create New", "Create")
+	There are currently @Model.Count() artist which we have a record of.
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.GenreName)
+            Genre Name
         </th>
         <th></th>
     </tr>

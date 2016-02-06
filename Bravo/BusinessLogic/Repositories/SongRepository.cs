@@ -1,4 +1,5 @@
-﻿using Bravo.DAL;
+﻿using Bravo.BindingModels;
+using Bravo.DAL;
 using Bravo.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -23,24 +24,27 @@ namespace Bravo.BusinessLogic.Repositories {
 			var entity = db.Songs
 				.Include(a => a.Album)
 				.Include(a => a.Album.Songs)
-				.Where(a => a.SongId == id)
-				.FirstOrDefault();
+				.FirstOrDefault(a => a.SongId == id);
 
 			return new SongViewModel(entity);
 		}
 
-		public SongViewModel Create(Models.Song song) {
-			db.Songs.Add(song);
+		public SongViewModel Create(CreateSongBindingModel song) {
+			var model = new Models.Song {
+				SongName = song.SongName,
+				AlbumId = song.AlbumId
+			};
+
+			db.Songs.Add(model);
 			db.SaveChanges();
 
-			return new SongViewModel(song);
+			return new SongViewModel(model);
 		}
 
-		public void Update(Models.Song song) {
+		public void Update(UpdateSongBindingModel song) {
 			var entity = db.Songs.FirstOrDefault(a => a.SongId == song.SongId);
 
 			entity.SongName = song.SongName;
-			entity.SongId = song.SongId;
 			entity.AlbumId = song.AlbumId;
 
 			db.Entry(entity).State = EntityState.Modified;

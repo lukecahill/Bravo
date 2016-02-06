@@ -1,13 +1,16 @@
 ﻿@model IEnumerable<Bravo.ViewModels.SongViewModelSummary>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Songs";
 }
 
 <h2>Song List</h2>
 <button class="btn btn-primary pull-right">
 	@Html.ActionLink("Create New", "Create")
 </button>
+<p>
+	There are currently @Model.Count() artist which we have a record of.
+</p>
 <table class="table table-striped">
     <tr>
 		<th>
