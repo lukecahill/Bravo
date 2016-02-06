@@ -6,7 +6,7 @@ namespace Bravo.BindingModels {
 		public string SongName { get; set; }
 
 		[Required]
-		public int AlbumnId { get; set; }
+		public int AlbumId { get; set; }
 	}
 
 	public class DeleteSongBindingModel {
@@ -15,6 +15,9 @@ namespace Bravo.BindingModels {
 	}
 
 	public class UpdateSongBindingModel {
+		[Required]
+		public int SongId { get; set; }
+
 		[Required]
 		public string SongName { get; set; }
 

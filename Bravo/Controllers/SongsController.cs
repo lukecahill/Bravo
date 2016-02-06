@@ -1,4 +1,4 @@
-﻿using Bravo.Models;
+﻿using Bravo.BindingModels;
 using Bravo.BusinessLogic.Repositories;
 using System.Web.Mvc;
 
@@ -33,13 +33,13 @@ namespace Bravo.Controllers {
 
 		// POST: Songs/Create
 		[HttpPost, ValidateAntiForgeryToken]
-		public ActionResult Create([Bind(Include = "SongId,SongName,AlbumId")] Song song) {
+		public ActionResult Create([Bind(Include = "SongId,SongName,AlbumId")] CreateSongBindingModel song) {
 			if (ModelState.IsValid) {
 				_rep.Create(song);
 				return RedirectToAction("Index");
 			}
 
-			ViewBag.AlbumId = _rep.AlbumsSelectList(song.SongId);
+			ViewBag.AlbumId = _rep.AlbumsSelectList(song.AlbumId);
 			return View(song);
 		}
 
@@ -58,7 +58,7 @@ namespace Bravo.Controllers {
 
 		// POST: Songs/Edit/5
 		[HttpPost, ValidateAntiForgeryToken]
-		public ActionResult Edit([Bind(Include = "SongId,SongName,AlbumId")] Song song) {
+		public ActionResult Edit([Bind(Include = "SongId,SongName,AlbumId")] UpdateSongBindingModel song) {
 			if (ModelState.IsValid) {
 				_rep.Update(song);
 				return RedirectToAction("Index");

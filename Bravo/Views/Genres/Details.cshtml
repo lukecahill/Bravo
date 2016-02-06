@@ -1,17 +1,19 @@
-﻿@model Bravo.Models.Genre
+﻿@model Bravo.ViewModels.GenreViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Details for " + Model.GenreName;
 }
 
-<h2>Details</h2>
+<h2>Details for @Model.GenreName</h2>
 
 <div>
-    <h4>Genre</h4>
+	<h4>
+		@Model.GenreName
+	</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.GenreName)
+            Genre Name
         </dt>
 
         <dd>
