@@ -13,7 +13,9 @@ namespace Bravo.BusinessLogic.Repositories {
 		private readonly BravoContext db = new BravoContext();
 
 		public IEnumerable<AlbumViewModelSummary>GetAll() {
-			var entity = db.Albums.ToList();
+			var entity = db.Albums
+				.Include(a => a.Artist)
+				.ToList();
 
 			return entity.Select(e => new AlbumViewModelSummary(e)).ToList();
 		}
@@ -21,6 +23,7 @@ namespace Bravo.BusinessLogic.Repositories {
 		public AlbumViewModel GetById(int id) {
 			var entity = db.Albums
 				.Include(a => a.Songs)
+				.Include(a => a.Artist)
 				.FirstOrDefault(e => e.AlbumId == id);
 
 			return new AlbumViewModel(entity);
