@@ -15,6 +15,8 @@ namespace Bravo.Models {
 		[Required]
 		public int ArtistId { get; set; }
 
+		public virtual Genre Genre { get; set; }
+		public virtual Artist Artist { get; set; }
 		public ICollection<Song> Songs { get; set; }
 	}
 }
