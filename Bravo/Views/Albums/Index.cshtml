@@ -10,21 +10,26 @@
 	@Html.ActionLink("Create New", "Create")
 </button>
 <p>
-	There are currently @Model.Count() artist which we have a record of.
+	There are currently @Model.Count() artists we have a record of.
 </p>
 <table class="table">
     <tr>
         <th>
             Album Title
         </th>
-        <th></th>
+        <th>
+			Artist Name
+		</th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.AlbumName)
-        </td>
+		<td>
+			@Html.DisplayFor(modelItem => item.AlbumName)
+		</td>
+		<td>
+			@Html.DisplayFor(modelItem => item.ArtistName)
+		</td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.AlbumId }) |
             @Html.ActionLink("Details", "Details", new { id=item.AlbumId }) |

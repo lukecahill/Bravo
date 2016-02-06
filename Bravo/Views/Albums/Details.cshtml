@@ -1,7 +1,7 @@
 ﻿@model Bravo.ViewModels.AlbumViewModel
 
 @{
-    ViewBag.Title = "Details" + Model.AlbumName;
+    ViewBag.Title = "Details " + Model.AlbumName;
 }
 
 <h2>Details for @Model.AlbumName</h2>
@@ -10,29 +10,22 @@
     <h4>@Model.AlbumName</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.GenreId)
-        </dt>
-		
-        <dd>
-            @Html.DisplayFor(model => model.GenreId)
-        </dd>
 
 		<dt>
-			@Html.DisplayNameFor(model => model.AlbumName)
+			Album Name
 		</dt>
 
 		<dd>
 			@Html.DisplayFor(model => model.AlbumName)
 		</dd>
 
-		<dt>
-			@Html.DisplayNameFor(model => model.ArtistId)
-		</dt>
-
-		<dd>
-			@Html.DisplayFor(model => model.ArtistId)
-		</dd>
+        <dt>
+			Artist Name
+        </dt>
+		
+        <dd>
+            @Html.DisplayFor(model => model.ArtistName)
+        </dd>
 
     </dl>
 </div>

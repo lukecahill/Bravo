@@ -15,6 +15,7 @@ namespace Bravo.BusinessLogic.Repositories {
 		public IEnumerable<SongViewModelSummary> GetAll() {
 			var entities = db.Songs
 				.Include(a => a.Album)
+				.Include(a => a.Album.Artist)
 				.ToList();
 
 			return entities.Select(e => new SongViewModelSummary(e)).ToList();
@@ -23,6 +24,7 @@ namespace Bravo.BusinessLogic.Repositories {
 		public SongViewModel GetById(int id) {
 			var entity = db.Songs
 				.Include(a => a.Album)
+				.Include(a => a.Album.Artist)
 				.Include(a => a.Album.Songs)
 				.FirstOrDefault(a => a.SongId == id);
 

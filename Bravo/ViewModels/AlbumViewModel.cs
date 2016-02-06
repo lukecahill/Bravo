@@ -6,6 +6,7 @@ namespace Bravo.ViewModels {
 		public string AlbumName { get; set; }
 		public int GenreId { get; set; }
 		public int ArtistId { get; set; }
+		public string ArtistName { get; set; }
 
 		public virtual ICollection<SongViewModel> SongList { get; set; }
 
@@ -14,6 +15,7 @@ namespace Bravo.ViewModels {
 			this.AlbumName = album.AlbumName;
 			this.GenreId = album.GenreId;
 			this.ArtistId = album.ArtistId;
+			this.ArtistName = album.Artist.ArtistName;
 		}
 
 		public AlbumViewModel() { }
@@ -23,11 +25,13 @@ namespace Bravo.ViewModels {
 		public int AlbumId { get; set; }
 		public string AlbumName { get; set; }
 		public int GenreId { get; set; }
+		public string ArtistName { get; set; }
 
 		public AlbumViewModelSummary(Models.Album album) {
 			this.AlbumId = album.AlbumId;
 			this.AlbumName = album.AlbumName;
 			this.GenreId = album.GenreId;
+			this.ArtistName = album.Artist.ArtistName;
 		}
 
 		public AlbumViewModelSummary() { }
