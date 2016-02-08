@@ -28,7 +28,7 @@ namespace Bravo.Controllers {
 		}
 
 		// POST: Genres/Create
-		[HttpPost, ValidateAntiForgeryToken]
+		[HttpPost, ValidateAntiForgeryToken, Authorize]
 		public ActionResult Create([Bind(Include = "GenreId,GenreName")] CreateGenreBindingModel genre) {
 			if (ModelState.IsValid) {
 				_rep.Create(genre);
@@ -49,7 +49,7 @@ namespace Bravo.Controllers {
 		}
 
 		// POST: Genres/Edit/5
-		[HttpPost, ValidateAntiForgeryToken]
+		[HttpPost, ValidateAntiForgeryToken, Authorize]
 		public ActionResult Edit([Bind(Include = "GenreId,GenreName")] UpdateGenreBindingModel genre) {
 			if (ModelState.IsValid) {
 				_rep.Update(genre);
@@ -68,7 +68,7 @@ namespace Bravo.Controllers {
 		}
 
 		// POST: Genres/Delete/5
-		[HttpPost, ActionName("Delete"), ValidateAntiForgeryToken]
+		[HttpPost, ActionName("Delete"), ValidateAntiForgeryToken, Authorize]
 		public ActionResult DeleteConfirmed(int id) {
 			var genre = _rep.GetById(id);
 			return RedirectToAction("Index");

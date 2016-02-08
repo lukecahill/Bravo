@@ -28,7 +28,7 @@ namespace Bravo.Controllers {
 		}
 
 		// POST: Artists/Create
-		[HttpPost, ValidateAntiForgeryToken]
+		[HttpPost, ValidateAntiForgeryToken, Authorize]
 		public ActionResult Create([Bind(Include = "ArtistId,ArtistName")] CreateArtistBindingModel artist) {
 			if (ModelState.IsValid) {
 				_rep.Create(artist);
@@ -49,7 +49,7 @@ namespace Bravo.Controllers {
 		}
 
 		// POST: Artists/Edit/5
-		[HttpPost, ValidateAntiForgeryToken]
+		[HttpPost, ValidateAntiForgeryToken, Authorize]
 		public ActionResult Edit([Bind(Include = "ArtistId,ArtistName")] UpdateArtistBindingModel artist) {
 			if (ModelState.IsValid) {
 				_rep.Update(artist);
@@ -71,7 +71,7 @@ namespace Bravo.Controllers {
 		}
 
 		// POST: Artists/Delete/5
-		[HttpPost, ActionName("Delete"), ValidateAntiForgeryToken]
+		[HttpPost, ActionName("Delete"), ValidateAntiForgeryToken, Authorize]
 		public ActionResult DeleteConfirmed(int id) {
 			_rep.Delete(id);
 			return RedirectToAction("Index");
