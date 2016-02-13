@@ -69,7 +69,7 @@ namespace Bravo.BusinessLogic.Repositories {
 		}
 
 		public SelectList GenreSelectList(int? id) {
-			return new SelectList(db.Genres, "GenreId", "ArtistId", id);
+			return new SelectList(db.Genres, "GenreId", "GenreName", id);
 		}
 
 		public void Dispose() {
